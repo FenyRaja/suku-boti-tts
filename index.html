@@ -34,6 +34,10 @@
     --radius-md: 16px;
     --radius-sm: 10px;
     --max-width: 1220px;
+    --primary: #684632;
+    --card: #ffffff;
+    --text: #2d2925;
+    --accent: #8b6042;
 }
 
 * {
@@ -68,6 +72,10 @@ body.dark {
     --border: #514237;
     --shadow: 0 18px 45px rgba(0, 0, 0, .22);
     --shadow-soft: 0 8px 25px rgba(0, 0, 0, .18);
+    --primary: #8b6042;
+    --card: #241c17;
+    --text: #f4eee5;
+    --accent: #e1c58e;
 }
 
 /* =========================================================
@@ -96,7 +104,7 @@ header {
 }
 
 .logo {
-    color: var(--white);
+    color: #ffffff !important;
     font-family: Georgia, "Times New Roman", serif;
     font-size: 1.15rem;
     font-weight: 700;
@@ -105,7 +113,16 @@ header {
 }
 
 .logo span {
-    color: var(--gold-300);
+    color: var(--gold-300) !important;
+}
+
+/* Logo tetap terbaca pada mode terang maupun gelap */
+body.dark .logo {
+    color: #ffffff !important;
+}
+
+body.dark .logo span {
+    color: #e1c58e !important;
 }
 
 nav {
@@ -1506,6 +1523,44 @@ body.dark .hypermap-wrap{background:linear-gradient(135deg,rgba(255,255,255,.04)
 
 /* # FACT CARD */
 .fact-card{position:relative;overflow:hidden;border-radius:28px;padding:38px;background:linear-gradient(120deg,var(--primary),#936b48);color:#fff;box-shadow:0 22px 55px rgba(60,38,22,.2)}.fact-card:after{content:"";position:absolute;width:180px;height:180px;border:1px solid rgba(255,255,255,.15);border-radius:50%;right:-50px;top:-60px}.fact-label{font-size:.7rem;letter-spacing:.22em;opacity:.75}.fact-text{font-family:Georgia,serif;font-size:clamp(1.25rem,2.5vw,2rem);line-height:1.35;max-width:780px;margin:12px 0 22px}.fact-btn{background:#fff;color:var(--primary);padding:11px 17px;border-radius:999px}
+.fact-card .fact-label,
+.fact-card .fact-text {
+    color: #ffffff !important;
+}
+
+.fact-btn {
+    display: inline-block;
+    font-weight: 700;
+    border: 1px solid rgba(104,70,50,.18);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.fact-btn:hover {
+    transform: translateY(-2px);
+}
+
+body.dark .fact-btn {
+    background: #f4eee5;
+    color: #4a3023;
+}
+
+.fact-link {
+    display: inline-block;
+    margin: 0 10px 0 0;
+    padding: 10px 16px;
+    border: 1px solid rgba(255,255,255,.45);
+    border-radius: 999px;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-weight: 700;
+    transition: .2s ease;
+}
+
+.fact-link:hover {
+    background: rgba(255,255,255,.14);
+    transform: translateY(-2px);
+}
 
 /* # GALLERY MUSEUM */
 .museum-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr;grid-auto-rows:210px;gap:15px}.museum-item{position:relative;overflow:hidden;border-radius:22px;border:1px solid var(--border);background:var(--card);cursor:pointer}.museum-item:first-child{grid-row:span 2}.museum-art{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 25%,rgba(217,164,65,.32),transparent 35%),linear-gradient(135deg,#765039,#c3955d);font-family:Georgia,serif;font-size:2rem;color:#fff;letter-spacing:.08em}.museum-overlay{position:absolute;inset:auto 0 0;padding:24px 18px 17px;background:linear-gradient(transparent,rgba(20,12,8,.82));color:#fff;transform:translateY(7px);transition:.45s}.museum-item:hover .museum-overlay{transform:translateY(0)}.museum-item:hover .museum-art{transform:scale(1.045);transition:transform .7s}.museum-art{transition:transform .7s}
@@ -2167,7 +2222,10 @@ body.dark .hypermap-wrap{background:linear-gradient(135deg,rgba(255,255,255,.04)
   <div class="fact-card">
     <span class="fact-label">TAHUKAH KAMU?</span>
     <div class="fact-text" id="factText">Media hypermedia memungkinkan pengguna memilih jalur informasi yang berbeda melalui tautan antarnode.</div>
-    <button class="fact-btn" onclick="nextFact()">Fakta berikutnya</button>
+    <div class="fact-actions">
+      <a id="factLink" class="fact-link" href="#sitemap">Lihat Sitemap →</a>
+      <button class="fact-btn" type="button" onclick="nextFact()">Fakta berikutnya</button>
+    </div>
   </div>
 </section>
 
@@ -2666,20 +2724,52 @@ function openInfo(title, image, category, description, key){
     modal.setAttribute('aria-hidden','false');
     document.body.classList.add('modal-open');
 }
-// # FAKTA: konten interaktif berganti tanpa memuat ulang halaman
+// # FAKTA: konten interaktif berganti dan terhubung ke bagian website
 const cultureFacts=[
-    'Media hypermedia memungkinkan pengguna memilih jalur informasi yang berbeda melalui tautan antarnode.',
-    'Node dapat berisi teks, gambar, audio, video, peta, atau bentuk media lain yang saling terhubung.',
-    'Sitemap visual membantu pengguna memahami hubungan antara bagian-bagian dalam sebuah media hypermedia.',
-    'Dokumentasi budaya digital sebaiknya dikembangkan menggunakan sumber dan keterangan yang dapat dipertanggungjawabkan.'
+    {
+        text:'Media hypermedia memungkinkan pengguna memilih jalur informasi yang berbeda melalui tautan antarnode.',
+        href:'#sitemap',
+        label:'Lihat Sitemap →'
+    },
+    {
+        text:'Node dapat berisi teks, gambar, audio, video, peta, atau bentuk media lain yang saling terhubung.',
+        href:'#hypermap',
+        label:'Lihat Hypermedia →'
+    },
+    {
+        text:'Sitemap visual membantu pengguna memahami hubungan antara bagian-bagian dalam sebuah media hypermedia.',
+        href:'#sitemap',
+        label:'Buka Sitemap →'
+    },
+    {
+        text:'Dokumentasi budaya digital sebaiknya dikembangkan menggunakan sumber dan keterangan yang dapat dipertanggungjawabkan.',
+        href:'#profil',
+        label:'Lihat Profil →'
+    }
 ];
+
 let factIndex=0;
-function nextFact(){
-    factIndex=(factIndex+1)%cultureFacts.length;
+
+function renderFact(){
     const el=document.getElementById('factText');
+    const link=document.getElementById('factLink');
+    const fact=cultureFacts[factIndex];
+
     el.style.opacity='0';
     el.style.transform='translateY(8px)';
-    setTimeout(()=>{el.textContent=cultureFacts[factIndex];el.style.opacity='1';el.style.transform='translateY(0)';},180);
+
+    setTimeout(()=>{
+        el.textContent=fact.text;
+        link.href=fact.href;
+        link.textContent=fact.label;
+        el.style.opacity='1';
+        el.style.transform='translateY(0)';
+    },180);
+}
+
+function nextFact(){
+    factIndex=(factIndex+1)%cultureFacts.length;
+    renderFact();
 }
 
 // # GLOSARIUM: menyaring kartu berdasarkan kata yang diketik pengguna
