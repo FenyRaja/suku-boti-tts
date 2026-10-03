@@ -176,17 +176,19 @@ button {
     position: relative;
 }
 
-/* # Aa dibuat floating di pojok kanan atas dan tidak mengikuti susunan menu */
+/* # Aa ditempatkan di kanan bawah, berdampingan dengan tombol mode terang/gelap */
 .corner-font {
     position: fixed;
-    top: 18px;
-    right: 20px;
+    right: 82px;
+    bottom: 22px;
     z-index: 2100;
 }
 
 .corner-font .font-panel {
-    top: calc(100% + 10px);
+    top: auto;
+    bottom: calc(100% + 10px);
     right: 0;
+    transform-origin: bottom right;
 }
 
 .font-main {
@@ -366,8 +368,14 @@ body.dark .font-actions button {
         right: -8px;
         width: 230px;
     }
+
     .corner-theme {
         right: 15px;
+        bottom: 15px;
+    }
+
+    .corner-font {
+        right: 73px;
         bottom: 15px;
     }
 }
@@ -723,6 +731,173 @@ body.dark .profile h3 {
 .audio-player {
     width: 100%;
     margin-top: 18px;
+}
+
+
+/* =========================================================
+   # LAPORAN PDF
+   ========================================================= */
+.report-section {
+    margin-bottom: 70px;
+}
+
+.report-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    padding: 30px 32px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+
+.report-panel h2 {
+    color: var(--brown-800);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.65rem;
+    font-weight: 500;
+    margin: 5px 0 7px;
+}
+
+body.dark .report-panel h2 {
+    color: var(--gold-300);
+}
+
+.report-panel p {
+    color: var(--muted);
+    font-size: .92rem;
+}
+
+.report-actions {
+    flex: 0 0 auto;
+}
+
+.report-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 150px;
+    min-height: 46px;
+    padding: 0 22px;
+    border-radius: 999px;
+    background: var(--brown-800);
+    color: #fff;
+    text-decoration: none;
+    font-size: .9rem;
+    font-weight: 700;
+    transition: .25s ease;
+}
+
+.report-btn:hover {
+    transform: translateY(-2px);
+    background: var(--brown-700);
+    box-shadow: 0 10px 24px rgba(48,32,23,.16);
+}
+
+/* =========================================================
+   # VIDEO BUDAYA
+   ========================================================= */
+.video-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(260px, .55fr);
+    gap: 22px;
+    align-items: stretch;
+}
+
+.video-card {
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+
+.video-frame {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+    background: #1d1511;
+    object-fit: cover;
+}
+
+.video-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+}
+
+.video-badge {
+    display: inline-flex;
+    width: fit-content;
+    margin-bottom: 14px;
+    padding: 6px 11px;
+    border: 1px solid rgba(199,154,82,.45);
+    border-radius: 999px;
+    color: var(--brown-700);
+    font-size: .7rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+body.dark .video-badge {
+    color: var(--gold-300);
+}
+
+.video-info h3 {
+    color: var(--brown-800);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+body.dark .video-info h3 {
+    color: var(--gold-300);
+}
+
+.video-info p {
+    color: var(--muted);
+    font-size: .9rem;
+}
+
+.video-file-note {
+    margin-top: 18px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border);
+    font-size: .78rem !important;
+}
+
+.video-file-note strong {
+    color: var(--ink);
+}
+
+@media (max-width: 760px) {
+    .report-panel,
+    .video-layout {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .report-actions {
+        width: 100%;
+    }
+
+    .report-btn {
+        width: 100%;
+    }
+
+    .video-info {
+        padding: 24px;
+    }
 }
 
 /* =========================================================
@@ -1210,6 +1385,34 @@ body.dark .stat strong {
     right: 22px;
     z-index: 1500;
     margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.laporan-btn {
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 17px;
+    border: 1px solid var(--border);
+    border-radius: 21px;
+    background: var(--white);
+    color: var(--brown-800);
+    text-decoration: none;
+    font: inherit;
+    font-size: .82rem;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: .25s ease;
+}
+
+.laporan-btn:hover {
+    border-color: var(--gold-500);
+    color: var(--gold-600);
+    transform: translateY(-2px);
 }
 
 .more-btn {
@@ -1252,6 +1455,8 @@ body.dark .stat strong {
 }
 
 .more-menu .action-btn {
+    display: block;
+    text-decoration: none;
     width: 100%;
     padding: 10px 12px;
     border: 0;
@@ -1268,10 +1473,15 @@ body.dark .stat strong {
     background: rgba(154,112,61,.10);
 }
 
+body.dark .laporan-btn,
 body.dark .more-btn,
 body.dark .more-menu {
     background: #211a15;
     color: var(--gold-300);
+}
+
+body.dark .laporan-btn:hover {
+    border-color: var(--gold-300);
 }
 
 body.dark .more-menu .action-btn {
@@ -1282,6 +1492,13 @@ body.dark .more-menu .action-btn {
     .page-actions {
         top: 145px;
         right: 14px;
+        gap: 6px;
+    }
+
+    .laporan-btn {
+        height: 40px;
+        padding: 0 14px;
+        font-size: .78rem;
     }
 }
 
@@ -1613,7 +1830,14 @@ body.dark .fact-btn {
      # [tidak digunakan: timeline-peta.jpg]
      ========================================================= -->
 
-<!-- # Tombol Aa: selalu berada di pojok kanan atas agar mudah ditemukan -->
+
+
+<!-- # Tombol mode terang/gelap: selalu tersedia di sudut kanan bawah -->
+<button class="corner-theme" type="button" onclick="toggleDark()" aria-label="Ganti mode terang dan gelap" title="Mode terang / gelap">
+    <span id="themeIcon">◐</span>
+</button>
+
+<!-- # Tombol Aa: berada di kanan bawah, berdampingan dengan mode terang/gelap -->
 <div class="corner-font font-control">
     <button class="font-main" type="button" onclick="toggleFontPanel()" aria-label="Pengaturan ukuran huruf" aria-expanded="false" title="Ukuran teks">Aa</button>
     <div class="font-panel" id="fontPanel" aria-hidden="true">
@@ -1629,11 +1853,6 @@ body.dark .fact-btn {
         <button class="font-reset" type="button" onclick="resetFontSize()">Kembalikan ke Normal</button>
     </div>
 </div>
-
-<!-- # Tombol mode terang/gelap: selalu tersedia di sudut kanan bawah -->
-<button class="corner-theme" type="button" onclick="toggleDark()" aria-label="Ganti mode terang dan gelap" title="Mode terang / gelap">
-    <span id="themeIcon">◐</span>
-</button>
 
 <!-- ================= HEADER ================= -->
 
@@ -1651,7 +1870,9 @@ body.dark .fact-btn {
             <a href="#falsafah">Falsafah</a>
             <a href="#motif">Motif</a>
             <a href="#audio">Audio</a>
+            <a href="#video">Video</a>
             <a href="#peta">Peta</a>
+            <a href="#laporan">Laporan</a>
             <a href="#sitemap">Sitemap</a>
             <a href="#galeri">Galeri</a>
             <a href="#hypermap">Hypermedia</a>
@@ -1692,7 +1913,6 @@ body.dark .fact-btn {
     <span> › </span>
     <a href="#home" class="crumb-current">Suku Boti</a>
 </div>
-
 
 <!-- ================= HERO ================= -->
 
@@ -1934,6 +2154,44 @@ body.dark .fact-btn {
 </section>
 
 
+<!-- VIDEO -->
+
+<!-- # VIDEO: dokumentasi visual budaya Suku Boti -->
+<section id="video" class="reveal">
+
+    <div class="section-title">
+        <h2>05 Video Budaya</h2>
+        <p>Dokumentasi video untuk menampilkan kegiatan, tradisi, lingkungan, atau kehidupan masyarakat Suku Boti.</p>
+    </div>
+
+    <div class="video-layout">
+
+        <div class="video-card">
+            <video class="video-frame" controls poster="images/hero-boti.jpg" preload="metadata">
+                <!-- Masukkan video ke folder video dengan nama video-boti.mp4 -->
+                <source src="video/video-boti.mp4" type="video/mp4">
+                Browser Anda tidak mendukung pemutaran video.
+            </video>
+        </div>
+
+        <div class="video-info">
+            <span class="video-badge">MEDIA DIGITAL</span>
+            <h3>Dokumentasi Budaya</h3>
+            <p>
+                Bagian ini dapat digunakan untuk menampilkan video dokumentasi
+                budaya Suku Boti agar informasi tidak hanya disampaikan melalui
+                teks, gambar, dan audio. Video membantu pengunjung melihat secara
+                langsung kehidupan, tradisi, dan aktivitas budaya masyarakat Suku Boti.
+                Melalui dokumentasi ini, pengunjung dapat memperoleh gambaran yang
+                lebih nyata mengenai lingkungan, kegiatan masyarakat, serta berbagai
+                bentuk kebudayaan yang masih dijaga dan diwariskan dari generasi ke generasi.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+
 <!-- PETA -->
 
 <!-- # PETA: lokasi interaktif -->
@@ -2170,6 +2428,7 @@ body.dark .fact-btn {
 
 <!-- # MENU TITIK TIGA: fitur cetak, berbagi, dan salin tautan -->
 <div class="page-actions">
+    <a class="laporan-btn" href="laporan/Laporan-Suku-Boti.pdf" target="_blank" rel="noopener">Laporan</a>
     <button class="more-btn" id="moreBtn" type="button" aria-label="Buka menu halaman" aria-expanded="false">⋮</button>
     <div class="more-menu" id="moreMenu">
         <button class="action-btn" type="button" onclick="printPage(); closeMoreMenu()">Cetak Halaman</button>
